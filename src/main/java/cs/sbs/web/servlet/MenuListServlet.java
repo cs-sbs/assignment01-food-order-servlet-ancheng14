@@ -25,23 +25,22 @@ public class MenuListServlet extends HttpServlet {
         resp.setContentType("text/plain; charset=UTF-8");
         PrintWriter out = resp.getWriter();
 
-        String name = req.getParameter("name");
+        // ✅ 关键修复：使用 "search" 参数名（不是 "name"）
+        String searchQuery = req.getParameter("search");
 
         out.println("Menu List:\n");
 
-        // ✅ 关键修复点：处理空搜索
-        if (name == null || name.trim().isEmpty()) {
-            // 空搜索 → 返回全部菜单
-            for (MenuItem item : menu) {
-                out.println(item);
-            }
+        // ✅ 处理空搜索：返回错误（测试期望的方式）
+        if (searchQuery == null || searchQuery.trim().isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            out.println("Error: Search query cannot be empty");
             return;
         }
 
         // 非空搜索 → 按名称过滤
         for (MenuItem item : menu) {
             if (item.getName().toLowerCase()
-                    .contains(name.trim().toLowerCase())) {
+                    .contains(searchQuery.trim().toLowerCase())) {
                 out.println(item);
             }
         }
