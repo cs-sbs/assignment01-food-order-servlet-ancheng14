@@ -8,13 +8,21 @@
 <h1>欢迎来外卖平台</h1>
 
 <h2>新增订单</h2>
-
 <form action="/order" method="post">
-    用户: <input name="customer"><br>
-    食物: <input name="food"><br>
-    数量: <input name="quantity"><br>
-    <input type="submit">
+    用户: <input name="customer"><br><br>
+    食物: <input name="food"><br><br>
+    数量: <input name="quantity"><br><br>
+    <input type="submit" value="下单">
 </form>
+
+<hr>
+
+<h3>菜单查询</h3>
+<a href="/menu?search=Fried">搜索 Fried 食物</a><br>
+<a href="/menu">查看全部菜单</a>
+
+<h3>订单详情示例</h3>
+<a href="/order/1001">查看订单 #1001</a>
 
 </body>
 </html>
