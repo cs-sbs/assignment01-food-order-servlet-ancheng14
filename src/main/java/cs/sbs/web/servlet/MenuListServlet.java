@@ -29,8 +29,19 @@ public class MenuListServlet extends HttpServlet {
 
         out.println("Menu List:\n");
 
+        // ✅ 关键修复点：处理空搜索
+        if (name == null || name.trim().isEmpty()) {
+            // 空搜索 → 返回全部菜单
+            for (MenuItem item : menu) {
+                out.println(item);
+            }
+            return;
+        }
+
+        // 非空搜索 → 按名称过滤
         for (MenuItem item : menu) {
-            if (name == null || item.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (item.getName().toLowerCase()
+                    .contains(name.trim().toLowerCase())) {
                 out.println(item);
             }
         }
